@@ -144,12 +144,13 @@ const criarHorasSelecao = () => {
   let horasDisponiveis = ''
 
   for(let i = 6; i < 23; i++) {
+    const hora = String(i).padStart(2, '0')
     horasDisponiveis += `
-    <option value="${i}:00">${i}:00</option>`
+    <option value="${hora}:00">${hora}:00</option>`
 
     horasDisponiveis += 
     `
-    <option value="${i}:30">${i}:30</option>
+    <option value="${hora}:30">${hora}:30</option>
     `
   }
 
