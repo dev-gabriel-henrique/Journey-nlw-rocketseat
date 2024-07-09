@@ -39,7 +39,11 @@ let atividades = [
 
 //arrow function
 const criarItemDeAtividade = (atividade) => {
-  let input = '<input type="checkbox" ';
+  let input = `
+  <input 
+  onchange="concluirAtividade(event)" 
+  value="${atividade.data}" 
+  type="checkbox" `;
 
   if (atividade.finalizada) {
     input += "checked";
@@ -65,6 +69,7 @@ const criarItemDeAtividade = (atividade) => {
 
 const atualizarListaDeAtividades = () => {
   const section = document.querySelector("section");
+  section.innerHTML = ''
 
   // verificar se a minha lista está vazia
   if (atividades.length == 0) {
@@ -80,7 +85,31 @@ const atualizarListaDeAtividades = () => {
 atualizarListaDeAtividades();
 
 const salvarAtividade = (event) => {
-  event.preventDefault();
+  event.preventDefault()
+  const dadosDoFormulario = new FormData(event.target)
+
+  const nome = dadosDoFormulario.get('atividade')
+  const dia = dadosDoFormulario.get('dia')
+  const hora = dadosDoFormulario.get('hora')
+  const data = `${dia} ${hora}`
+
+  const novaAtividade = {
+    nome,
+    data,
+    finalizada: false
+  }
+
+  const atividadeExiste = atividades.find((atividade) => {
+    return atividade.data == novaAtividade.data
+  })
+
+  if(atividadeExiste) {
+    return alert('Dia/Hora não disponível')
+  }
+
+  atividades = [novaAtividade,...atividades]
+  atualizarListaDeAtividades()
+
 };
 
 const criarDiasSelecao = () => {
@@ -128,3 +157,18 @@ const criarHorasSelecao = () => {
   .innerHTML = horasDisponiveis
 }
 criarHorasSelecao()
+
+const concluirAtividade = (event) => {
+  const input = event.target
+  const dataDesteInput = input.value
+
+  const atividade = atividades.find((atividade) => {
+    return atividade.data == dataDesteInput
+  })
+  
+  if(!atividade) {
+    return
+  }
+
+  atividade.finalizada = !atividade.finalizada
+}
