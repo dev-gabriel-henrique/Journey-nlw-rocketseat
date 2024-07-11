@@ -1,4 +1,206 @@
-html {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, input, select, button, option {
+  font-family: 'Inter', sans-serif;
   background-color: #09090b;
   color: #fafafa;
+  letter-spacing: -0.02em;
+  line-height: 120%;
+}
+
+:root {
+  --lime-300: #Bef264;
+  --lime-950: #1a2e05;
+  --zinc-50: #fafafa;
+  --zinc-100: #f4f4f5;
+  --zinc-400: #a1a1aa;
+  --zinc-500: #71717a;
+  --zinc-700: #3f3f46;
+  --zinc-800: #27272a;
+  --zinc-900: #18181b;
+  --zinc-950: #09090b;
+}
+
+#app {
+  padding: 40px 20px;
+  max-width: 320px;
+  margin: auto;
+}
+
+/* form */
+
+#place {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 22px 16px;
+
+  font-size: 14px;
+
+  margin-bottom: 32px;
+}
+
+input, select {
+  all: unset;
+}
+
+input, select, button {
+  width: 100%;
+}
+
+.fields {
+  display: grid;
+  gap: 8px;
+}
+
+.field-wrapper {
+  padding: 18px;
+  background-color: var(--zinc-950);
+  border: 1px solid var(--zinc-800);
+  border-radius: 8px;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.field-wrapper:focus-within {
+  outline: 2px solid #7c39a1;
+}
+
+button {
+  margin-top: 12px;
+  border: none;
+  padding: 12px 20px;
+  background-color: #7c39a1;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  color: rgb(21, 1, 27);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c672f4;
+  transition: background-color .4s ease;
+}
+
+button:active {
+  transform: scale(0.8);
+  transition: transform 0.2s ease;
+}
+
+.card-bg {
+background: #18181B;
+
+/* shape */
+box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.1),
+ 0px 4px 4px rgba(0, 0, 0, 0.1), 
+ 0px 2px 2px rgba(0, 0, 0, 0.1), 
+ 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 
+ inset 0px 0px 0px 1px rgba(255, 255, 255, 0.03), 
+inset 0px 1px 0px rgba(255, 255, 255, 0.03);
+
+border-radius: 12px;
+
+}
+
+main {
+  margin-top: 32px;
+
+  & h1 {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+
+    margin-bottom: 24px;
+  }
+}
+
+section {
+  display: grid;
+  gap: 10px;
+}
+
+section input[type="checkbox"] {
+  inset: 0;
+  position: absolute;
+}
+
+section .card-bg {
+  padding: 10px 16px;
+  position: relative;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+section .card-bg:has(:checked) .active, 
+section .card-bg .inactive {
+  display: block;
+  transition: display 0.3s ease;
+}
+
+section .card-bg:has(:checked) .inactive, 
+section .card-bg .active {
+  display: none;
+  transition: display 0.3s ease;
+}
+
+section .card-bg > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+time {
+  font-size: 14px;
+  color: var(--zinc-400);
+}
+
+time.full {
+  display: none;
+}
+
+@media (width > 1024px) {
+  #app {
+    display: flex;
+    max-width: 960px;
+    gap: 32px;
+
+    & main {
+      margin-top: 0;
+      flex: 1;
+
+      & h1 {
+        text-align: left;
+      }
+    }
+  }
+
+  & time.full {
+    display: block;
+  }
+
+  & time.short {
+    display: none;
+  }
+}
+
+section .card-bg {
+  animation: appear 800ms;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
 }
